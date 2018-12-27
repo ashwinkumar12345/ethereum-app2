@@ -3,6 +3,8 @@
 > ## Contents
 
 **[Lottery Contract](#lotterycontract)**<br>
+**[Design Considerations](#designconsiderations)**<br>
+**[Basic Solidity Types](#basicsoliditytypes)**<br>
 
 <a name="lotterycontract"></a>
 > ## Lottery Contract 
@@ -29,4 +31,21 @@
 - Functions: 
     - enter - A function that someone can send ether to and enter the contract
     - pickWinner - A function that randomly pick a winner and send them the entire contents of the prize pool
-  
+
+<a name="basicsoliditytypes"></a>
+> ## Basic Solidity Types
+
+- Here are some of the basic variable types in Solidity:
+    - string - Sequence of characters. For example, "Hi there!", "Bye there"
+    - bool - Has boolean values. For example, true or false
+    - int - Integer, positive or negative. No decimal. For example, -3000, 58209
+    - uint - Integer, positive only. For example, 20
+        - int32, uint16, etc - You can specify the number of bits to be used to specify an int or uint 
+        - By default, int = int256, uint = uint256
+        - You can always just use uint or int if you are not sure about the exact size of bits to use
+        - You would pay for all extra bits that you would use
+        - The increase in price is not very significant
+    - fixed/ufixed - Decimal numbers. Usually used to store math calculations. For example, 3.14, -43.46
+        - Contracts in general are way more about storing raw data and implementing basic business logic 
+        - As soon as you start doing complex math, you need to pay for every operation that you perform inside a contract
+    - address - Store addresses. Has methods tied to it for sending money. For example, 0x632tbjh32782..
