@@ -1,11 +1,13 @@
 # ethereum-app2
 
-Lottery Contract
-================
+> ## Contents
 
-Goal
-----
-- Create a lottery contract
+**[Lottery Contract](#lotterycontract)**<br>
+
+<a name="lotterycontract"></a>
+> ## Lottery Contract 
+
+- This project is to create a lottery contract
 - The lottery contract has a prize pool and a list of people who have entered for the prize pool
 - Imagine two players P1 and P2 who have sent some amount of ether to the lottery contract
 - P1 and P2 will be recorded as players in the game
