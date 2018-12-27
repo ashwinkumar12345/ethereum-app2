@@ -23,8 +23,10 @@
 > ## Design Considerations 
 
 - At a basic level, you need to store two basic pieces of information in the contract:
-- Variables: manager - Address of the person who created the contract
-             players - Array of addresses of the list of people who have entered (as soon as somebody sends ether to the contract, they are automatically entered into it)
-  Functions: enter - A function that someone can send ether to and enter the contract
-             pickWinner - A function that randomly pick a winner and send them the entire contents of the prize pool
+- Variables: 
+    - manager - Address of the person who created the contract
+    - players - Array of addresses of the list of people who have entered (as soon as somebody sends ether to the contract, they are automatically entered into it)
+- Functions: 
+    - enter - A function that someone can send ether to and enter the contract
+    - pickWinner - A function that randomly pick a winner and send them the entire contents of the prize pool
   
