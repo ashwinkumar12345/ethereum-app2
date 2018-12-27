@@ -14,3 +14,5 @@ Goal
 - The manager doesn't pick the winner, the manager only tells the contract to pick a winner
 - At that point, the contract will look at its list of participants, randomly pick one of the players (say P1) and send all the money from the prize pool to that winner (P1)
 - The lottery contract resets and becomes ready to accept a new list of players and repeat itself all over again
+
+![lottery-contract](https://user-images.githubusercontent.com/4720428/50492192-0ea1b300-09cb-11e9-88e9-5ce1a84bdddd.png)
