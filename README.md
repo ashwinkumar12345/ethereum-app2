@@ -5,6 +5,7 @@
 **[Lottery Contract](#lotterycontract)**<br>
 **[Design Considerations](#designconsiderations)**<br>
 **[Basic Solidity Types](#basicsoliditytypes)**<br>
+**[Starting the Lottery Contract](#startingthelotterycontract)**<br>
 
 <a name="lotterycontract"></a>
 > ## Lottery Contract 
@@ -49,3 +50,40 @@
         - Contracts in general are way more about storing raw data and implementing basic business logic 
         - As soon as you start doing complex math, you need to pay for every operation that you perform inside a contract
     - address - Store addresses. Has methods tied to it for sending money. For example, 0x632tbjh32782..
+    
+<a name="startingthelotterycontract"></a>
+> ## Starting the Lottery Contract
+
+- Open your Remix code editor
+- Delete any existing contract in the browser window
+
+      pragma solidity ^0.4.17
+     
+      //Version of the compiler
+      //Contract will be valid for newer versions of Solidity
+      
+      contract Lottery {
+      
+          address public manager;
+      
+          function Lottery() public {
+      
+              manager = msg.sender;
+              
+             //msg object is a global variable
+             //msg describes who sent the transaction to the network and some details about the transaction
+             //msg is available to any function invocation
+             //msg.data - Arguments that we want to send to that function
+             //msg.gas - Amount of gas you have available to run some code
+             //msg.sender - Address of the person who sent a transaction or call to the contract
+             //msg.value - Amount of ether (in wei) that has been sent
+             
+          }
+      }
+      
+- Click the Run tab 
+- Select Javascript VM as the environment
+- Click Create, will create a new instance
+- Click the manager variable, you will see an address
+- The address will match the address of the account you have selected
+
