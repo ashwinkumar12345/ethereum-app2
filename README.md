@@ -6,6 +6,9 @@
 **[Design Considerations](#designconsiderations)**<br>
 **[Basic Solidity Types](#basicsoliditytypes)**<br>
 **[Starting the Lottery Contract](#startingthelotterycontract)**<br>
+**[Reference Types](#referencetypes)**<br>
+**[Solidity Gotcha](#soliditygotcha)**<br>
+**[Entering the Lottery](#enteringthelottery)**<br>
 
 <a name="lotterycontract"></a>
 > ## Lottery Contract 
@@ -87,3 +90,41 @@
 - Click the manager variable, you will see an address
 - The address will match the address of the account you have selected
 
+<a name="referencetypes"></a>
+> ## Reference Types
+
+- Arrays is an example of a reference types:
+    - fixed array - Contains a single type of element. Has unchanging length. For example, `int[3] -> [1, 2, 3]`, `bool[2] -> [true, false]`
+    - dynamic array - Contains a single type of element. Can change in length over time. For example, `int[] -> [1, 2, 3, 4, 5]`
+    - mapping - Collection of key value pairs. Think of Javascript objects, Ruby hashes, or Python dictionary. All keys same type and all values same type. For example, a collection of different cars, or houses `mapping(string=>string)` 
+    - struct - Collection of key value pairs that can have different types. For example, a collection of a singular thing `struct Car{string make; string mode; uint value;}`
+    
+<a name="soliditygotcha"></a>
+> ## Solidity Gotcha
+
+- You can build a two-dimensional array in Solidity. For example, `const myArray = [[1, 2, 3], [1, 2, 3], [1, 2, 3]];`
+- The gotcha is that you don't have the ability to pull a two-dimensional array from the Solidity world into the Javascript world
+- Strings inside Solidity is represented as dynamic array
+- You cannot transfer array of strings into Javascript
+
+<a name="enteringthelottery"></a>
+> ## Entering the Lottery
+
+- Open your Remix editor and continue:
+
+      pragma solidity ^0.4.17
+     
+      contract Lottery {
+      
+        address public manager;
+        address[] public players;
+        
+        function Lottery() public {
+              manager = msg.sender;
+          }
+        function enter() public payable {
+              players.push(msg.sender);
+          }
+      }
+      
+      }
