@@ -9,6 +9,10 @@
 **[Reference Types](#referencetypes)**<br>
 **[Solidity Gotcha](#soliditygotcha)**<br>
 **[Entering the Lottery](#enteringthelottery)**<br>
+**[Validating the Contract](#validatingcontract)**<br>
+**[Using Remix Debugger](#remixdebugger)**<br>
+**[Pseudo Random Number Generator](#pseudorandomnumbergenerator)**<br>
+**[Selecting a Winner](#selectingawinner)**<br>
 
 <a name="lotterycontract"></a>
 > ## Lottery Contract 
@@ -120,10 +124,82 @@
         address[] public players;
         
         function Lottery() public {
-              manager = msg.sender;
+            manager = msg.sender;
           }
         function enter() public payable {
-              players.push(msg.sender);
+            require (msg.value > 0.01 ether)
+            //Used for validation
+            //To make sure that the sender sends in atleast 0.01 ether to enter the lottery
+            players.push(msg.sender);
           }
         } 
       }
+<a name="validatingcontract"></a>
+> ## Validating the Contract
+
+- Click the `Run` tab
+- In the Environment tab, select `Javascript VM`
+- Click the `Create` button
+- Click the `manager` variable and you will get back your account address
+- Click the `enter` variable
+- In an array, you can only access one variable at a time
+- in the `players` variable, enter `0` and click `players`
+- You will get back your own account address
+- Select a different account and click `enter`
+- In the `players` array, enter `1` and click `players`
+- You will see the new account address 
+- You need to add a require statement to make sure that the sender sends in some min ether to enter the contract
+
+        function enter() public payable {
+            require (msg.value > 0.01 ether)
+            //Used for validation
+            //To make sure that the sender sends in atleast 0.01 ether to enter the lottery
+            players.push(msg.sender);
+          }
+          
+ - Cancel the contract
+ - Click `Create` to redeploy the contract
+ - Specify 0.11 ether in the `Value` tab
+ - Click the `enter` variable
+ - You can select a another account and specify 0.00001 ether and click `enter`
+ - You will see an error message and the transaction will not go through
+ 
+<a name="remixdebugger"></a>
+> ## Using Remix Debugger
+
+- In the transaction log, you see two buttons, `Details` and `Debug`
+- If you click `Details`, you will see some info about the transaction
+- If you click `Debug`, the right-hand panel changes
+- You can use this tool to step through the execution of your code, to get an understanding of how data is flowing through your contract
+- The sliding bar allows you to fast forward or rewind the exection of your contract
+- You can click step in arrow to step through the exection of each step 
+- You can also see the current state of your contract, by clicking `Solidity State` dropdown
+
+<a name="pseudorandomnumbergenerator"></a>
+> ## Pseudo Random Number Generator
+
+- Once a certain number of players have entered the contract, the manager should be able to call a `pickWinner` function to select a winner
+- Goal of the `pickWinner` function is to randomly pick a winner and send them the prize pool
+- In Solidity, you don't have a random number generator, so you need to fake the randomness
+- Take the current block difficulty (time to process an actual transaction, represented as an `int`, large number), current time, and addresses of players and feed them to a SHA3 algorithm
+- The SHA3 algorthm will output a really big number in hex
+- Take this really big hex number and use that to pick a `random` winner
+- Create a helper function to implement this random function that you can call in the `pickWinner` function
+
+        function random() private view returns (uint) {
+            uint(keccak256(block.difficulty, now, players));
+            //keccak is a class of algorthims and sha3 is a partcular instance of it..equivalent 
+            //block and now are global variables
+          }
+     
+<a name="selectingawinner"></a>
+> ## Selecting a Winner
+
+- Use the modulo operator to return the remainder between the random function output and players.length 
+- You will get back a `random` number between 0 and players.length
+- The winner would be the player at this index in the players array
+
+        function pickWinner() public {
+            uint index = random() % players.length;
+          }
+
