@@ -13,6 +13,7 @@
 **[Using Remix Debugger](#remixdebugger)**<br>
 **[Pseudo Random Number Generator](#pseudorandomnumbergenerator)**<br>
 **[Selecting a Winner](#selectingawinner)**<br>
+**[Sending Ether to the Winner](#sendingethertothewinner)**<br>
 
 <a name="lotterycontract"></a>
 > ## Lottery Contract 
@@ -202,4 +203,21 @@
         function pickWinner() public {
             uint index = random() % players.length;
           }
+ 
+ <a name="sendingethertothewinner"></a>
+> ## Sending Ether to the Winner
+
+- Send ether to the winner:
+
+        function pickWinner() public {
+            uint index = random() % players.length;
+            players[index].transfer(this.balance);
+            //players[index] returns an address
+            //you can transfer function on an address
+            //takes all of the money in the contract and send to that player
+          }
+          
+- Test out the contract in Remix
+- Call the pickWinner function
+- Make sure the ether is transferred to one of the players entered into the contract
 
