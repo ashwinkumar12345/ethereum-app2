@@ -138,6 +138,7 @@
           }
         } 
       }
+      
 <a name="validatingcontract"></a>
 > ## Validating the Contract
 
@@ -154,12 +155,12 @@
 - You will see the new account address 
 - You need to add a require statement to make sure that the sender sends in some min ether to enter the contract
 
-        function enter() public payable {
-            require (msg.value > 0.01 ether)
-            //Used for validation
-            //To make sure that the sender sends in atleast 0.01 ether to enter the lottery
-            players.push(msg.sender);
-          }
+      function enter() public payable {
+        require (msg.value > 0.01 ether)
+        //Used for validation
+        //To make sure that the sender sends in atleast 0.01 ether to enter the lottery
+        players.push(msg.sender);
+      }
           
  - Cancel the contract
  - Click `Create` to redeploy the contract
@@ -190,11 +191,11 @@
 - Take this really big hex number and use that to pick a `random` winner
 - Create a helper function to implement this random function that you can call in the `pickWinner` function
 
-        function random() private view returns (uint) {
-            uint(keccak256(block.difficulty, now, players));
-            //keccak is a class of algorthims and sha3 is a partcular instance of it..equivalent 
-            //block and now are global variables
-          }
+      function random() private view returns (uint) {
+         uint(keccak256(block.difficulty, now, players));
+         //keccak is a class of algorthims and sha3 is a partcular instance of it..equivalent 
+         //block and now are global variables
+      }
      
 <a name="selectingawinner"></a>
 > ## Selecting a Winner
@@ -203,9 +204,9 @@
 - You will get back a `random` number between 0 and players.length
 - The winner would be the player at this index in the players array
 
-        function pickWinner() public {
-            uint index = random() % players.length;
-          }
+      function pickWinner() public {
+         uint index = random() % players.length;
+      }
  
  <a name="sendingethertothewinner"></a>
 > ## Sending Ether to the Winner
@@ -269,3 +270,14 @@
       }
 
 - You can now go into any function in the contract and add the restricted keyword if you think it's an administrative-level function that should be called only by the manager
+
+ <a name="functionmodifier"></a>
+> ## Returning Players Array
+
+- This function returns a list of all players entered into the contract, instead of calling each element with the index
+- This will make it easier for a web application to display the addresses of all players in the contract and also the number of players at any given point of time
+
+      function getPlayers() public view returns (address[]) {
+         return players;
+      }
+
