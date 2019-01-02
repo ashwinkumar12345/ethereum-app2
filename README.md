@@ -226,3 +226,11 @@
 
 - You would want to reset the contract to run a another round of the lottery immediately after picking a winner          
 - For this, just empty out the players array
+
+![lottery-contract-2](https://user-images.githubusercontent.com/4720428/50608685-350b9680-0e82-11e9-8344-c0bd981bfb73.png)
+
+        function pickWinner() public {
+            uint index = random() % players.length;
+            players[index].transfer(this.balance);
+            players = new address[](0); //resetting players array
+          }
