@@ -14,6 +14,8 @@
 **[Pseudo Random Number Generator](#pseudorandomnumbergenerator)**<br>
 **[Selecting a Winner](#selectingawinner)**<br>
 **[Sending Ether to the Winner](#sendingethertothewinner)**<br>
+**[Resetting Contract State](#resettingcontractstate)**<br>
+**[Requiring Managers](#requiringmanagers)**<br>
 
 <a name="lotterycontract"></a>
 > ## Lottery Contract 
@@ -209,13 +211,13 @@
 
 - Send ether to the winner:
 
-        function pickWinner() public {
-            uint index = random() % players.length;
-            players[index].transfer(this.balance);
-            //players[index] returns an address
-            //you can transfer function on an address
-            //takes all of the money in the contract and send to that player
-          }
+      function pickWinner() public {
+         uint index = random() % players.length;
+         players[index].transfer(this.balance);
+         //players[index] returns an address
+         //you can transfer function on an address
+         //takes all of the money in the contract and send to that player
+      }
           
 - Test out the contract in Remix
 - Call the pickWinner function
@@ -229,8 +231,22 @@
 
 ![lottery-contract-2](https://user-images.githubusercontent.com/4720428/50608685-350b9680-0e82-11e9-8344-c0bd981bfb73.png)
 
-        function pickWinner() public {
-            uint index = random() % players.length;
-            players[index].transfer(this.balance);
-            players = new address[](0); //resetting players array
-          }
+    function pickWinner() public {
+       uint index = random() % players.length;
+       players[index].transfer(this.balance);
+       players = new address[](0); //resetting players array
+    }
+
+ <a name="requiringmanagers"></a>
+> ## Requiring Managers
+
+- You also want to make sure only the manager can pick a winner
+- This is to make sure that no player can estimate the peusdo randomness
+
+      function pickWinner() public {
+         require (msg.sender == manager)
+         uint index = random() % players.length;
+         players[index].transfer(this.balance);
+         players = new address[](0); 
+      }
+
