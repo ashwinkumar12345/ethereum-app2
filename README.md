@@ -282,3 +282,14 @@
          return players;
       }
 
+ <a name="newtestsetup"></a>
+> ## New Test Setup
+
+- You can just duplicate the inbox tests and use as a base
+- Copy the inbox directory and paste as another directory
+- Rename the folder as `lottery`
+- Start your Atom code editor in the lottery directory
+- Inside the contracts directory, rename `Inbox.sol` to `Lottery.sol`
+- Replace the code in `Lottery.sol` with the code in the Remix editor
+- Also, delete the `inbox.test.js` and create a new `lottery.test.js`
+
