@@ -16,6 +16,7 @@
 **[Sending Ether to the Winner](#sendingethertothewinner)**<br>
 **[Resetting Contract State](#resettingcontractstate)**<br>
 **[Requiring Managers](#requiringmanagers)**<br>
+**[Function Modifier](#functionmodifier)**<br>
 
 <a name="lotterycontract"></a>
 > ## Lottery Contract 
@@ -244,9 +245,25 @@
 - This is to make sure that no player can estimate the peusdo randomness
 
       function pickWinner() public {
-         require (msg.sender == manager)
+         require (msg.sender == manager);
          uint index = random() % players.length;
          players[index].transfer(this.balance);
          players = new address[](0); 
       }
 
+ <a name="functionmodifier"></a>
+> ## Function Modifier
+
+- To make the code more readable, you can add a function modifier to the contract
+- Function modifiers are used to solely to avoid repeating lines of code common to different functions
+
+      function pickWinner() public restricted {
+         uint index = random() % players.length;
+         players[index].transfer(this.balance);
+         players = new address[](0); 
+      }
+
+      modifier restricted() {
+         require(msg.sender == manager);
+         _;
+      }
