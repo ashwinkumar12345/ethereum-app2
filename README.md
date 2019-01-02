@@ -221,3 +221,8 @@
 - Call the pickWinner function
 - Make sure the ether is transferred to one of the players entered into the contract
 
+ <a name="resettingcontractstate"></a>
+> ## Resetting Contract State
+
+- You would want to reset the contract to run a another round of the lottery immediately after picking a winner          
+- For this, just empty out the players array
