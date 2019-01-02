@@ -18,6 +18,7 @@
 **[Requiring Managers](#requiringmanagers)**<br>
 **[Function Modifier](#functionmodifier)**<br>
 **[Returning Players Array](#returningplayersarray)**<br>
+**[New Test Setup](#newtestsetup)**<br>
 
 <a name="lotterycontract"></a>
 > ## Lottery Contract 
