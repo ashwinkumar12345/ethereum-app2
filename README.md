@@ -17,6 +17,7 @@
 **[Resetting Contract State](#resettingcontractstate)**<br>
 **[Requiring Managers](#requiringmanagers)**<br>
 **[Function Modifier](#functionmodifier)**<br>
+**[Returning Players Array](#returningplayersarray)**<br>
 
 <a name="lotterycontract"></a>
 > ## Lottery Contract 
@@ -271,7 +272,7 @@
 
 - You can now go into any function in the contract and add the restricted keyword if you think it's an administrative-level function that should be called only by the manager
 
- <a name="functionmodifier"></a>
+ <a name="returningplayersarray"></a>
 > ## Returning Players Array
 
 - This function returns a list of all players entered into the contract, instead of calling each element with the index
