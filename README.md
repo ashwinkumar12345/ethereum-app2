@@ -267,3 +267,5 @@
          require(msg.sender == manager);
          _;
       }
+
+- You can now go into any function in the contract and add the restricted keyword if you think it's an administrative-level function that should be called only by the manager
