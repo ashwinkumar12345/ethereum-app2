@@ -19,6 +19,8 @@
 **[Function Modifier](#functionmodifier)**<br>
 **[Returning Players Array](#returningplayersarray)**<br>
 **[New Test Setup](#newtestsetup)**<br>
+**[Test Project Updates](#testprojectupdates)**<br>
+**[Test Helper Review](#testhelperreview)**<br>
 
 <a name="lotterycontract"></a>
 > ## Lottery Contract 
@@ -293,4 +295,41 @@
 - Inside the contracts directory, rename `Inbox.sol` to `Lottery.sol`
 - Replace the code in `Lottery.sol` with the code in the Remix editor
 - Also, delete the `inbox.test.js` and create a new `lottery.test.js`
+
+ <a name="testprojectupdates"></a>
+> ## Test Project Updates
+
+- Open your `compile.js` file
+- Replace `Inbox.sol` to `Lottery.sol`
+- Replace `:Inbox` to `:Lottery`
+- Update `inboxPath` to `lotteryPath` in both places
+- Open the `deploy.js` file
+- Delete `, arguments: ["Hi there!']` since we dont pass any arguments to the lottery instance
+- Save both the files
+
+ <a name="testhelperreview"></a>
+> ## Test Helper Review
+
+- Open the `Lottery.test.js` file and write the following code:
+
+      const assert = require('assert');
+      const ganache = require('ganache-cli');
+      const Web3 = require('web3');
+      const web3 = new Web3(ganache.provider());
+      
+      const { interface, bytecode } = require('../compile');
+      
+      let lottery;
+      let accounts;
+      
+      beforeEach(async () => {
+        accounts = await web3.eth.getAccounts();
+        lottery = await new web3.eth.Contract(JSON.parse(interface))
+            .deploy({ data: bytecode })
+            .send({ from: accounts[0], gas: '1000000'});
+      });
+      
+
+
+
 
