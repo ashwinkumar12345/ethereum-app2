@@ -21,6 +21,8 @@
 **[New Test Setup](#newtestsetup)**<br>
 **[Test Project Updates](#testprojectupdates)**<br>
 **[Test Helper Review](#testhelperreview)**<br>
+**[Asserting Deployment](#assertingdeployment)**<br>
+**[Entering the Lottery Test](#enteringthelotterytest)**<br>
 
 <a name="lotterycontract"></a>
 > ## Lottery Contract 
@@ -329,7 +331,48 @@
             .send({ from: accounts[0], gas: '1000000'});
       });
       
+ <a name="assertingdeployment"></a>
+> ## Asserting Deployment
 
+- Continue with the following code:
 
+      describe('Lottery Contract', () => {
+      
+        it('deploys a contract', () => {
+            assert.ok(lottery.options.address);
+        });
+      });
+ 
+- Open your terminal inside your `lottery` directory:
 
+      npm run test
+
+- You should see the deploy test passing
+
+ <a name="enteringthelotterytest"></a>
+> ## Entering the Lottery Test
+
+- Continue with the following code:
+
+      describe('Lottery Contract', () => {
+      
+        it('allows one account to enter', async () => {
+            await lottery.methods.enter().send({
+                from: accounts[0],
+                value: web3.utils.toWei('0.02', 'ether')
+            });
+            const players = await lottery.methods.getPlayers().call({
+                from: accounts[0]
+            });
+            assert.equal(accounts[0], players[0]);
+            assert.equal(1, players.length);
+        });
+        
+      });
+ 
+- Open your terminal inside your `lottery` directory:
+
+      npm run test
+
+- You should see both the tests passing
 
