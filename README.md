@@ -458,3 +458,32 @@
       npm run test
    
 - You should see the only manager can run pickWinner test passing
+
+ <a name="endtoendtest"></a>
+> ## End to End Test
+
+- Test to see that the contract sends the money to the player and resets the players array
+- Enter in only one player into a contract and make sure that players gets the ether
+
+      it('sends money to the winner and resets the players array', async () => {
+            await lottery.methods.enter().send({
+                from: accounts[0],
+                value: web3.utils.toWei('2', 'ether')
+            });
+      const initialBalance = await web3.eth.getBalance(accounts[0]); //retrieves the amount of ether in wei that a given account controls
+            await lottery.methods.pickWinner().send({
+                from: accounts[0];
+            });
+      const finalBalance = await web3.eth.getBalance(accounts[0]); 
+      });
+      //Difference between initalBalance and finalBalance won't be exactly 2 ether because you have to pay some gas for a transaction to occur on the ethereum netweork
+      const difference = finalBalance - initialBalance;
+      console.log(finalBalance - initialBalance); The offset from 2 ether is the amount spent as gas
+      assert(difference > web3.utils.toWei('1.8', 'ether'));
+      });
+
+- Open your terminal inside your `lottery` directory:
+
+      npm run test
+   
+- You should see this test passing and also see the gas spent
