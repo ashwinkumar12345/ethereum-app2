@@ -27,6 +27,7 @@
 **[Asserting Multiple Players](#assertingmultipleplayers)**<br>
 **[Try-Catch Assertions](#trycatchassertions)**<br>
 **[Testing Function Modifiers](#testingfunctionmodifiers)**<br>
+**[End to End Test](#endtoendtest)**<br>
 
 <a name="lotterycontract"></a>
 > ## Lottery Contract 
