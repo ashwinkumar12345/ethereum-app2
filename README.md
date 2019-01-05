@@ -25,7 +25,8 @@
 **[Entering the Lottery Test](#enteringthelotterytest)**<br>
 **[Entering the Lottery Test](#enteringthelotterytest)**<br>
 **[Asserting Multiple Players](#assertingmultipleplayers)**<br>
-**[Try-Catch Assertions ](#trycatchassertions)**<br>
+**[Try-Catch Assertions](#trycatchassertions)**<br>
+**[Testing Function Modifiers](#testingfunctionmodifiers)**<br>
 
 <a name="lotterycontract"></a>
 > ## Lottery Contract 
@@ -384,7 +385,7 @@
 
 - This test makes sure that multiple players can enter the contract successfully:
 
-        it('allows multiple account to enter', async () => {
+      it('allows multiple account to enter', async () => {
             await lottery.methods.enter().send({
                 from: accounts[0],
                 value: web3.utils.toWei('0.02', 'ether')
@@ -404,11 +405,11 @@
             assert.equal(accounts[1], players[1]);
             assert.equal(accounts[2], players[2]);
             assert.equal(3, players.length);
-        });
+      });
   
 - Open your terminal inside your `lottery` directory:
 
-        npm run test
+      npm run test
    
 - You should see the multiple players test passing
 
@@ -417,7 +418,7 @@
 
 - This test is to make sure that the players sends the correct minimum amount of ether to the contract:
 
-        it('requires a minimum amount of ether to enter', async () => {
+      it('requires a minimum amount of ether to enter', async () => {
         try {
             await lottery.methods.enter().send({
                 from: accounts[0],
@@ -427,10 +428,33 @@
             } catch (err) {
               assert(err);
             }
-        });
+      });
 
 - Open your terminal inside your `lottery` directory:
 
-        npm run test
+      npm run test
    
 - You should see the minimum amount of ether test passing
+
+ <a name="testingfunctionmodifiers"></a>
+> ## Testing Function Modifiers
+
+- If someone other than the manager calls the `pickWinner()` function, an error is thrown
+- We don't have to enter to a function this time
+
+      it('only manager can call pickWinner', async () => {
+        try {
+            await lottery.methods.pickWinner().send({
+                from: accounts[1],
+            });
+            assert(false); //If we get to this line of code automatically fail the test
+            } catch (err) {
+              assert(err);
+            }
+      });
+
+- Open your terminal inside your `lottery` directory:
+
+      npm run test
+   
+- You should see the only manager can run pickWinner test passing
