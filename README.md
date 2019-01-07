@@ -27,7 +27,7 @@
 **[Asserting Multiple Players](#assertingmultipleplayers)**<br>
 **[Try-Catch Assertions](#trycatchassertions)**<br>
 **[Testing Function Modifiers](#testingfunctionmodifiers)**<br>
-**[End to End Test](#endtoendtest)**<br>
+**[End-to-End Test](#endtoendtest)**<br>
 
 <a name="lotterycontract"></a>
 > ## Lottery Contract 
@@ -461,7 +461,7 @@
 - You should see the only manager can run pickWinner test passing
 
  <a name="endtoendtest"></a>
-> ## End to End Test
+> ## End-to-End Test
 
 - Test to see that the contract sends the money to the player and resets the players array
 - Enter in only one player into a contract and make sure that players gets the ether
